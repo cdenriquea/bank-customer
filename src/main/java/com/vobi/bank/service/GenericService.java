@@ -1,4 +1,4 @@
-package com.bovi.bank.service;
+package com.vobi.bank.service;
 
 import java.util.List;
 import java.util.Optional;

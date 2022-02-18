@@ -1,4 +1,4 @@
-package com.bovi.bank.service;
+package com.vobi.bank.service;
 
 import com.vobi.bank.domain.Customer;
 

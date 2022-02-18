@@ -151,7 +151,7 @@ class CustomerRepositoryIT {
 		customerOptional=customerRepository.findById(idCustomer);
 		
 		//Assert
-		
+		 
 		assertFalse(customerOptional.isPresent(),"No pudo borrar el customer");
 	}
 	
