@@ -20,10 +20,11 @@ import com.vobi.bank.domain.Customer;
 import com.vobi.bank.domain.DocumentType;
 
 
- 
+import lombok.extern.slf4j.Slf4j;
 
 @SpringBootTest
 @TestMethodOrder(OrderAnnotation.class)
+@Slf4j
 class CustomerRepositoryIT {
 
  
