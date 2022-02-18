@@ -17,7 +17,7 @@ import com.vobi.bank.domain.Customer;
 import com.vobi.bank.repository.CustomerRepository;
 
 @Service
-public class CustomerServiceImpl implements CustomerService {
+public class CustomerServiceimpl implements CustomerService {
 	
 	@Autowired
 	CustomerRepository customerRepository;
