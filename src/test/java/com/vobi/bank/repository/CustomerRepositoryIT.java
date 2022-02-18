@@ -1,11 +1,12 @@
 package com.vobi.bank.repository;
 
-
- 
-
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +42,7 @@ class CustomerRepositoryIT {
  
 
  @Test
-
+ @Order(1)  
  void debeValidarLasDependencias() {
 
  assertNotNull(customerRepository);
@@ -53,7 +54,7 @@ class CustomerRepositoryIT {
  
 
  @Test
-
+ @Order(2)
  void debeCrearUnCustomer() {
 
  //Arrange
@@ -105,7 +106,70 @@ class CustomerRepositoryIT {
  assertNotNull(customer,"El customer es nulo no se pudo grabar");
 
 }
+ 
+ @Test
+ @Order(3)
+ void debeModificarUnCustomer() {
 
+ //Arrange
+
+ Integer idCustomer=14836554;
+ Customer customer=null;
+
+ 
+ customer=customerRepository.findById(idCustomer).get();
+ customer.setEnable("N");
+
+
+ //Act
+
+ customer=customerRepository.save(customer);
+
+ 
+
+ //Assert
+
+ assertNotNull(customer,"El customer es nulo no se pudo grabar");
+
+}
+	@Test
+	@Order(4)
+	void debeBorrarUnCustomer()throws Exception  {
+		//Arrange
+		
+		Integer idCustomer=14836554;
+		Customer customer=null;
+		Optional<Customer> customerOptional=null;
+		
+		assertTrue(customerRepository.findById(idCustomer).isPresent(),"No encontro el customer");
+		
+		customer=customerRepository.findById(idCustomer).get();
+		
+		//Act
+		customerRepository.delete(customer);
+		customerOptional=customerRepository.findById(idCustomer);
+		
+		//Assert
+		
+		assertFalse(customerOptional.isPresent(),"No pudo borrar el customer");
+	}
+	
+	@Test
+	@Order(5)
+	void debeConsultarTodosLosCustomers()throws Exception  {
+		//Arrange
+		List<Customer> customers=null;
+		
+		//Act
+		
+		customers=customerRepository.findAll();
+		
+		customers.forEach(customer->log.info(customer.getName()));		
+		
+		//Assert
+		
+		assertFalse(customers.isEmpty(),"No consulto Customers");	
+	}
  
 
 }
